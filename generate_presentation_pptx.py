@@ -345,7 +345,7 @@ add_card(s10, Inches(6.6), Inches(1.5), Inches(5.9), Inches(2.4),
 # Card 2: Underactuated Mechanical Intelligence & Contact Progression
 add_card(s10, Inches(6.6), Inches(4.05), Inches(5.9), Inches(2.65),
          "Underactuated Mechanical Intelligence & Grasping Sequence",
-         ["1 Actuator -> 3 DOFs: Single Dyneema tendon drives MCP, PIP, DIP joints (zero inverse kinematics needed).",
+         ["Phase 0 (Rest Configuration): Tendon slack (T = 0 N), living hinges unbent (theta_i = 0 deg), open grasp envelope (dia 90 - 110 mm).",
           "Phase 1 (In-Flight Flexure): Cable tension T flexes all joints simultaneously proportional to compliance K_theta_i.",
           "Phase 2 (Proximal Arrest): Object contact creates counter-moment M_contact, locking proximal link rotation.",
           "Phase 3 (Passive Conformal Wrap): Tension bypasses arrested link via PTFE sleeve to curl distal joints around irregular contours.",

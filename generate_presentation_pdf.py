@@ -525,7 +525,7 @@ html_slides = """<!DOCTYPE html>
                 <div class="card card-teal" style="padding: 10px 14px; margin: 0;">
                     <h3 style="margin-bottom: 5px; font-size: 11pt; color: #0d9488;">Underactuated Mechanical Intelligence &amp; Grasping Sequence</h3>
                     <ul style="font-size: 8.5pt; line-height: 1.35; padding-left: 16px; margin: 0;">
-                        <li><strong>1 Actuator &rarr; 3 DOFs:</strong> Single Dyneema tendon drives MCP, PIP, DIP joints without complex multi-joint inverse kinematics.</li>
+                        <li><strong>Phase 0 (Rest Configuration):</strong> Tendon slack (\(T = 0\text{ N}\)), living hinges unbent (\(\theta_i = 0^\circ\)), establishing open grasp envelope (\(\phi \approx 90 - 110\text{ mm}\)).</li>
                         <li><strong>Phase 1 (In-Flight Flexure):</strong> Cable tension \(T\) flexes all 3 joints simultaneously proportional to compliance \(K_{\theta, i}\).</li>
                         <li><strong>Phase 2 (Proximal Arrest):</strong> Workpiece contact creates counter-moment \(M_{\text{contact}}\), arresting proximal link rotation.</li>
                         <li><strong>Phase 3 (Passive Conformal Curling):</strong> Tension bypasses the arrested link through the PTFE sleeve, curling distal phalanges around object contours.</li>
