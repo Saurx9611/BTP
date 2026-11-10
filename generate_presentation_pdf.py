@@ -6,6 +6,10 @@ html_slides = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <title>BTP Presentation - Soft Robotic Gripper</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
 <style>
     @page {
         size: 297mm 167mm; /* 16:9 widescreen */
@@ -500,7 +504,7 @@ html_slides = """<!DOCTYPE html>
 <div class="slide">
     <div class="slide-header">
         <h2>Kinematic Modeling & Pseudo-Rigid-Body Formulation</h2>
-        <p>Analytical modeling of flexure notch living hinges and tendon routing</p>
+        <p>Analytical PRBM living hinge stiffness, friction modeling, and underactuated contact mechanics</p>
     </div>
     <div class="slide-content">
         <div class="grid-2">
@@ -508,16 +512,26 @@ html_slides = """<!DOCTYPE html>
                 <img src="../Figures and Diagrams/gripper_kinematics_diagram.png" alt="Kinematics Diagram">
                 <div class="caption">Figure: Kinematic profile of the monolithic compliant finger under cable tension.</div>
             </div>
-            <div class="card card-blue">
-                <h3>Compliant Living Hinge Mechanics</h3>
-                <ul>
-                    <li><strong>Howell Pseudo-Rigid-Body Model (PRBM):</strong> Circular flexure notches modeled as characteristic pivots with torsional stiffness \(K_\theta\):<br>
-                    <span style="font-weight: bold; color: #003366;">\(K_\theta = \frac{E \cdot w \cdot t^{2.5}}{9 \pi \sqrt{r}}\)</span></li>
-                    <li>Where \(E\) = flexural modulus of TPU 95A, \(w\) = width, \(t\) = throat thickness (1.6 mm), \(r\) = notch radius (2.5 mm).</li>
-                    <li><strong>Capstan Tendon Friction Law across joints:</strong><br>
-                    <span style="font-weight: bold; color: #003366;">\(T_{\text{distal}} = T_{\text{base}} \cdot e^{-\sum \mu_f \theta_i}\)</span></li>
-                    <li>Micro-PTFE sleeves reduce \(\mu_f\) to ~0.08, maximizing force delivery to distal tactile pads.</li>
-                </ul>
+            <div style="display: flex; flex-direction: column; gap: 10px; height: 100%; justify-content: center;">
+                <div class="card card-blue" style="padding: 10px 14px; margin: 0;">
+                    <h3 style="margin-bottom: 5px; font-size: 11pt; color: #003366;">Compliant Living Hinge Mechanics (PRBM)</h3>
+                    <ul style="font-size: 8.5pt; line-height: 1.35; padding-left: 16px; margin: 0;">
+                        <li><strong>Howell PRBM Formulation:</strong> Circular flexure notches modeled as torsional spring joints:<br>
+                        <span style="font-weight: bold; color: #003366;">\(K_\theta = \frac{E \cdot w \cdot t^{2.5}}{9 \pi \sqrt{r}}\)</span> &nbsp; (\(t = 1.6\text{ mm}\), \(r = 2.5\text{ mm}\), \(w = 20\text{ mm}\))</li>
+                        <li><strong>Capstan Friction Law:</strong> <span style="font-weight: bold; color: #003366;">\(T_{\text{distal}} = T_{\text{base}} \cdot e^{-\sum \mu_f \theta_i}\)</span></li>
+                        <li>Micro-PTFE sleeves minimize friction to \(\mu_f \le 0.08\), maximizing force delivery.</li>
+                    </ul>
+                </div>
+                <div class="card card-teal" style="padding: 10px 14px; margin: 0;">
+                    <h3 style="margin-bottom: 5px; font-size: 11pt; color: #0d9488;">Underactuated Mechanical Intelligence &amp; Grasping Sequence</h3>
+                    <ul style="font-size: 8.5pt; line-height: 1.35; padding-left: 16px; margin: 0;">
+                        <li><strong>1 Actuator &rarr; 3 DOFs:</strong> Single Dyneema tendon drives MCP, PIP, DIP joints without complex multi-joint inverse kinematics.</li>
+                        <li><strong>Phase 1 (In-Flight Flexure):</strong> Cable tension \(T\) flexes all 3 joints simultaneously proportional to compliance \(K_{\theta, i}\).</li>
+                        <li><strong>Phase 2 (Proximal Arrest):</strong> Workpiece contact creates counter-moment \(M_{\text{contact}}\), arresting proximal link rotation.</li>
+                        <li><strong>Phase 3 (Passive Conformal Curling):</strong> Tension bypasses the arrested link through the PTFE sleeve, curling distal phalanges around object contours.</li>
+                        <li><strong>Phase 4 &amp; 5 (Sensor Lock &amp; Return):</strong> Distal pad engages FSR402; slacking tendon releases stored elastic strain energy (\(E_{\text{strain}} = \sum \frac{1}{2} K_{\theta, i} \theta_i^2\)) for passive spring return.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -843,6 +857,7 @@ with sync_playwright() as p:
     page = browser.new_page(viewport={"width": 1920, "height": 1080})
     page.goto("file:///" + html_path.replace("\\", "/"))
     page.wait_for_timeout(2000)
+    page.locator(".slide").nth(9).screenshot(path="Presentation/slide10_preview.png")
     page.pdf(
         path=pdf_path,
         width="297mm",

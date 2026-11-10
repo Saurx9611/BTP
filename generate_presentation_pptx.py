@@ -330,17 +330,27 @@ add_card(s9, Inches(8.8), Inches(1.5), Inches(3.7), Inches(5.2),
 # ==================== SLIDE 10: KINEMATICS & PRBM ====================
 s10 = create_slide_base("Kinematic Modeling & Pseudo-Rigid-Body Formulation")
 if os.path.exists("Figures and Diagrams/gripper_kinematics_diagram.png"):
-    s10.shapes.add_picture("Figures and Diagrams/gripper_kinematics_diagram.png", Inches(0.8), Inches(1.5), Inches(6.0), Inches(5.2))
+    s10.shapes.add_picture("Figures and Diagrams/gripper_kinematics_diagram.png", Inches(0.8), Inches(1.5), Inches(5.6), Inches(5.2))
 
-add_card(s10, Inches(7.1), Inches(1.5), Inches(5.4), Inches(5.2),
-         "Compliant Living Hinge Mechanics",
-         ["Howell Pseudo-Rigid-Body Model (PRBM): Models flexure notches as characteristic pivots with torsional spring stiffness K_theta:",
-          "K_theta = (E * w * t^2.5) / (9 * pi * sqrt(r))",
-          "Where E = flexural modulus of TPU 95A, w = width, t = throat thickness (1.6 mm), r = notch radius (2.5 mm).",
-          "Capstan Tendon Friction Law across joints:",
-          "T_distal = T_base * exp(-sum(mu_f * theta_i))",
-          "Micro-PTFE sleeves reduce mu_f to ~0.08, maximizing force delivery to distal tactile pads."],
+# Card 1: Compliant Living Hinge Mechanics
+add_card(s10, Inches(6.6), Inches(1.5), Inches(5.9), Inches(2.4),
+         "Compliant Living Hinge Mechanics (PRBM)",
+         ["Howell PRBM: Circular notches modeled as torsional spring joints:",
+          "  K_theta = (E * w * t^2.5) / (9 * pi * sqrt(r))  [t = 1.6 mm, r = 2.5 mm, w = 20 mm]",
+          "Capstan Tendon Friction Law across living hinges:",
+          "  T_distal = T_base * exp(-sum(mu_f * theta_i))",
+          "Micro-PTFE sleeves minimize friction to mu_f <= 0.08, maximizing force delivery."],
          border_color=C_ACCENT_BLUE)
+
+# Card 2: Underactuated Mechanical Intelligence & Contact Progression
+add_card(s10, Inches(6.6), Inches(4.05), Inches(5.9), Inches(2.65),
+         "Underactuated Mechanical Intelligence & Grasping Sequence",
+         ["1 Actuator -> 3 DOFs: Single Dyneema tendon drives MCP, PIP, DIP joints (zero inverse kinematics needed).",
+          "Phase 1 (In-Flight Flexure): Cable tension T flexes all joints simultaneously proportional to compliance K_theta_i.",
+          "Phase 2 (Proximal Arrest): Object contact creates counter-moment M_contact, locking proximal link rotation.",
+          "Phase 3 (Passive Conformal Wrap): Tension bypasses arrested link via PTFE sleeve to curl distal joints around irregular contours.",
+          "Phase 4 & 5 (Sensor Lock & Return): Distal pad engages FSR402; slacking tendon releases stored strain energy for passive spring return."],
+         border_color=C_ACCENT_TEAL)
 
 # ==================== SLIDE 11: MATERIAL & SIMULATION STRATEGY ====================
 s11 = create_slide_base("Proposed Material Selection & Planned Simulation Strategy")
