@@ -299,7 +299,7 @@ html_slides = """<!DOCTYPE html>
     <div class="slide-content">
         <div class="grid-3">
             <div class="card card-blue">
-                <h3>Actuation & Kinematics (Saurav)</h3>
+                <h3>Actuation & Kinematics (Sanchali)</h3>
                 <ul>
                     <li>Evaluated pneumatic, tendon, SMA, and DEA architectures.</li>
                     <li>Mobility classification: constrained, underconstrained, deformable.</li>
@@ -317,7 +317,7 @@ html_slides = """<!DOCTYPE html>
                 </ul>
             </div>
             <div class="card card-red">
-                <h3>Tactile Transduction (Sanchali)</h3>
+                <h3>Tactile Transduction (Saurav)</h3>
                 <ul>
                     <li>Surveyed piezoresistive, capacitive, piezoelectric, and optical sensors.</li>
                     <li>Decoupled static contact force from dynamic slip micro-vibrations.</li>
@@ -816,7 +816,7 @@ html_slides = """<!DOCTYPE html>
                     <li>[5] Dahiya, R. S., et al. (2010). Tactile Sensing. IEEE T-RO.</li>
                     <li>[6] Howell, L. L. (2001). Compliant Mechanisms. Wiley.</li>
                     <li>[7] Mooney, M. (1940). Theory of Large Elastic Deformation. J. Appl. Phys.</li>
-                    <li>[8] Student Literature Reviews: Saurav (2026), Sanchali (2026), Chandana (2026), Joint Report (2026), Dept. Mech. Eng., IIT Kharagpur.</li>
+                    <li>[8] Student Literature Reviews: Sanchali (2026), Saurav (2026), Chandana (2026), Joint Report (2026), Dept. Mech. Eng., IIT Kharagpur.</li>
                 </ul>
             </div>
         </div>

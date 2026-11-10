@@ -29,10 +29,10 @@
    * *Source Verification:* Matches `Chandana's Literature Work (1)` (Pages 9–10) where FDM 3D printing was selected to eliminate multi-part molds, vacuum degassing, and long curing cycles.
 2. **Tactile Transduction & Slip Detection:**
    * *Claim:* FSR402 piezoresistive sensors coupled with Butterworth low-pass filtering ($20\text{ Hz}$) and on-chip FFT ($100 - 300\text{ Hz}$) can detect incipient slip without bulky optical cameras.
-   * *Source Verification:* Matches `Sanchali's Literature Work (1)` (Sections 2.1–2.6) and `BTP_Report (1)` (Pages 3–4).
+   * *Source Verification:* Assigned to Saurav Shekhar; matches tactile sensing literature synthesis and `BTP_Report (1)` (Pages 3–4).
 3. **Actuation & Kinematics:**
    * *Claim:* Tendon-driven transmission with remote base-mounted servomotors eliminates distal mass while compliant flexure hinges eliminate joint backlash and sliding friction.
-   * *Source Verification:* Matches `Saurav's Literature Work (1)` (Sections 2.1–2.4) and Howell's Pseudo-Rigid-Body Model (PRBM).
+   * *Source Verification:* Assigned to Shinde Sanchali Sanjay; matches Howell's Pseudo-Rigid-Body Model (PRBM) and actuation comparative analysis.
 4. **Finite Element Analysis:**
    * *Claim:* Hyperelastic 2-parameter Mooney-Rivlin or Yeoh constitutive model in Ansys Mechanical for non-linear large deflection modeling.
    * *Source Verification:* Matches `BTP_Report (1)` (Page 3).
@@ -48,7 +48,7 @@
 | `Final Deliverables/BTP_Presentation_Soft_Robotic_Gripper.pptx` | MS PowerPoint | 18 Slides (16:9) | Modern engineering card layout, zero text walls, embedded vector plots, formatted tables. |
 | `Final Deliverables/BTP_Presentation_Soft_Robotic_Gripper.pdf` | Adobe PDF | 18 Slides (16:9) | Widescreen PDF export via Chromium; ready for digital presentation or projection. |
 | `Final Deliverables/BTP_I_Defense_Presentation_Script.pdf` | Adobe PDF | 13 Pages | Professional 10-minute defense rehearsal manual with pointing map, timing, and Q&A. |
-| `Final Deliverables/BTP_I_Defense_Presentation_Script.md` | Markdown | Complete Script | Full spoken script with individual owner attribution (Sanchali on Slides 1–4). |
+| `Final Deliverables/BTP_I_Defense_Presentation_Script.md` | Markdown | Complete Script | Full spoken script with individual owner attribution (Sanchali: Actuation/Kinematics, Saurav: Tactile/Slip Reflex). |
 | `Final Deliverables/BTP_Report_LaTeX_Source.zip` | ZIP Archive | Complete TeX Deck | Contains `main.tex`, `references.bib`, and all 5 high-res figures; ready for Overleaf. |
 
 ---

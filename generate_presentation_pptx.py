@@ -208,7 +208,7 @@ add_card(s4, Inches(6.8), Inches(3.8), Inches(5.7), Inches(2.9),
 # ==================== SLIDE 5: LITERATURE CORPUS ====================
 s5 = create_slide_base("Consolidated Literature Review: Team Synthesis")
 add_card(s5, Inches(0.8), Inches(1.5), Inches(3.7), Inches(5.2),
-         "Actuation & Kinematics (Saurav)",
+         "Actuation & Kinematics (Sanchali)",
          ["Comprehensive review of soft actuation (pneumatic, tendon, SMA, DEA).",
           "Mobility classification: constrained, underconstrained, deformable.",
           "Identified payload vs compliance trade-off in fluidic grippers.",
@@ -224,7 +224,7 @@ add_card(s5, Inches(4.8), Inches(1.5), Inches(3.7), Inches(5.2),
          border_color=C_ACCENT_TEAL)
 
 add_card(s5, Inches(8.8), Inches(1.5), Inches(3.7), Inches(5.2),
-         "Tactile Transduction (Sanchali)",
+         "Tactile Transduction (Saurav)",
          ["Surveyed piezoresistive, capacitive, piezoelectric, and optical sensors.",
           "Decoupled static contact force from high-frequency slip vibration.",
           "FSR402 thin-film piezoresistors provide ideal form factor.",
@@ -503,7 +503,7 @@ add_card(s18, Inches(6.8), Inches(1.5), Inches(5.7), Inches(5.2),
           "[5] Dahiya, R. S., et al. (2010). Tactile Sensing. IEEE T-RO.",
           "[6] Howell, L. L. (2001). Compliant Mechanisms. Wiley.",
           "[7] Mooney, M. (1940). Theory of Large Elastic Deformation. J. Appl. Phys.",
-          "[8] Student Literature Reviews: Saurav (2026), Sanchali (2026), Chandana (2026), Joint Report (2026), Dept. Mech. Eng., IIT Kharagpur."],
+          "[8] Student Literature Reviews: Sanchali (2026), Saurav (2026), Chandana (2026), Joint Report (2026), Dept. Mech. Eng., IIT Kharagpur."],
          border_color=C_ACCENT_BLUE)
 
 os.makedirs("Presentation", exist_ok=True)

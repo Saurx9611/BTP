@@ -648,8 +648,8 @@ refs = [
     'Howell, L. L. (2001). Compliant Mechanisms. John Wiley & Sons, New York.',
     'Mooney, M. (1940). A Theory of Large Elastic Deformation. Journal of Applied Physics, 11(9), 582-592.',
     'Yeoh, O. H. (1993). Some Forms of the Strain Energy Function for Rubber. Rubber Chemistry and Technology, 66(5), 754-771.',
-    'Shekhar, S. (2026). Literature Review on Soft Robotics, Alternative Actuation Schemes, and Gripper Architectures. Department of Mechanical Engineering, IIT Kharagpur.',
-    'Shinde, S. S. (2026). Comprehensive Literature Survey on Tactile and Resistive Sensing Technologies for Soft Robotic Grippers. Department of Mechanical Engineering, IIT Kharagpur.',
+    'Shinde, S. S. (2026). Literature Review on Soft Robotics, Alternative Actuation Schemes, and Gripper Architectures. Department of Mechanical Engineering, IIT Kharagpur.',
+    'Shekhar, S. (2026). Comprehensive Literature Survey on Tactile and Resistive Sensing Technologies for Soft Robotic Grippers. Department of Mechanical Engineering, IIT Kharagpur.',
     'Chandana, G. (2026). Investigation of Materials and Additive Fabrication Routes for Compliant Robotic Grippers. Department of Mechanical Engineering, IIT Kharagpur.',
     'Chandana, G., Shinde, S. S., & Shekhar, S. (2026). Soft Robotic Grippers using Tactile Sensor. BTP-I Project Report, Supervised by Prof. Sankha Deb, Department of Mechanical Engineering, IIT Kharagpur.'
 ]
