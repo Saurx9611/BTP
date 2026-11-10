@@ -679,19 +679,16 @@ p = doc.add_paragraph('The design of the compliant gripper embodies direct bio-i
                       '• Flexor Tendon Sheath Biomechanics: Emulates the human deep flexor tendon (flexor digitorum profundus) running through its synovial flexor sheath (vagina fibrosa digitorum) by routing high-tensile Dyneema cable through low-friction micro-PTFE conduits embedded within the finger core.\n'
                       '• Cutaneous Mechanoreceptor Reflex Arc (Meissner\'s Corpuscles): In human glabrous skin, Fast-Adapting Type I (FA-I / Meissner) mechanoreceptors do not measure static clamping pressure; instead, they fire rapid bursts of action potentials in response to high-frequency shear micro-vibrations (100 - 300 Hz) generated during the microscopic slip of papillary epidermal ridges across the object surface. This sensory volley triggers an involuntary spinal reflex arc that boosts grip force within 30 - 40 ms before macro-slip occurs. The proposed mechatronic system mirrors this biological reflex: the FSR402 sensor detects high-frequency tactile micro-vibrations, the ESP32 performs on-chip 256-point Radix-4 FFT spectral analysis in the 100 - 300 Hz band on Core 0, and triggers a sub-35 ms servomotor torque compensation interrupt on Core 1.')
 
-add_header_p('4.3.4 Target Workpiece Library and Physical Compatibility Matrix', level=3)
-p = doc.add_paragraph('To evaluate gripper versatility across unstructured environments, a standardized workpiece library is established spanning agriculture, biomedical handling, domestic food packaging, and industrial assembly. Table 4.3 details the dimensional envelope, mass range, grasping modality, and operational force requirements for each target class.')
+add_header_p('4.3.4 Target Workpiece Library and Physical Compatibility Matrix (Agricultural Domain)', level=3)
+p = doc.add_paragraph('To evaluate gripper versatility in automated agricultural harvesting, sorting, and delicate post-harvest packaging, a standardized workpiece library is established focusing exclusively on the agricultural application domain. Table 4.3 details the dimensional envelope, mass range, grasping modality, and operational force requirements for representative agricultural produce with diverse geometries, peel fragilities, and compliance characteristics.')
 
 tab_work_data = [
-    ['Application Domain', 'Target Workpiece', 'Envelope (dia / Dim.)', 'Mass Range', 'Grasp Mode', 'Clamping Force', 'Handling Challenge & Compliance Advantage'],
-    ['Agriculture', 'Ripe Tomato / Peach', 'dia 50 - 75 mm', '120 - 250 g', 'Envelope', '0.8 - 2.0 N', 'Thin skin bruises easily; compliant living hinges distribute contact pressure safely.'],
-    ['Agriculture', 'Fresh Strawberry', 'dia 25 - 40 mm', '20 - 50 g', 'Pinch', '0.3 - 0.8 N', 'Highly delicate surface; fingertip compliance and low force threshold prevent bruising.'],
-    ['Biomedical', 'Glass Vaccine Vial', 'dia 22 - 32 mm', '35 - 80 g', 'Envelope', '1.5 - 3.5 N', 'Smooth low-friction glass; high TPU static friction (mu_s approx 0.7) prevents slipping.'],
-    ['Biomedical', 'Thin Glass Test Tube', 'dia 15 - 25 mm', '25 - 60 g', 'Pinch', '0.8 - 2.0 N', 'Brittle cylindrical glass; pinch grasp avoids radial crushing stress concentrations.'],
-    ['Food & Domestic', 'Raw Chicken Egg', 'dia 42 - 58 mm', '55 - 70 g', 'Envelope', '0.5 - 1.5 N', 'Brittle calcareous shell; multi-point conformal wrap prevents point-load shell fracture.'],
-    ['Food & Domestic', 'Electric Light Bulb', 'dia 60 - 80 mm', '40 - 75 g', 'Envelope', '0.8 - 2.0 N', 'Fragile spherical glass envelope; conformal wrap grasps contoured globe reliably.'],
-    ['Industrial', 'Aluminum Cylinder', 'dia 40 - 70 mm', '400 - 1200 g', 'Envelope', '8.0 - 18.0 N', 'Heavy rigid metallic part; high-torque envelope lock securely supports up to 1.5 kg payload.'],
-    ['Industrial', 'Prismatic Carton Box', '50 x 60 x 90 mm', '250 - 800 g', 'Envelope', '4.0 - 10.0 N', 'Flat geometric boundaries; compliant living hinges adapt passively to angular corners.']
+    ['Domain', 'Target Produce', 'Envelope (dia / Dim.)', 'Mass Range', 'Grasp Mode', 'Clamping Force', 'Handling Challenge & Compliance Advantage'],
+    ['Agriculture', 'Ripe Tomato (S. lycopersicum)', 'dia 50 - 75 mm (Spherical)', '120 - 250 g', 'Power Envelope', '0.8 - 2.0 N', 'Thin pericarp skin easily bruised; compliant living hinges distribute contact pressure uniformly across fruit.'],
+    ['Agriculture', 'Fresh Strawberry (F. ananassa)', 'dia 25 - 40 mm (Conical)', '20 - 50 g', 'Precision Pinch', '0.3 - 0.8 N', 'Soft achene-covered surface easily punctured; low-force fingertip pinch prevents tissue bruising.'],
+    ['Agriculture', 'Ripe Peach / Plum (P. persica)', 'dia 55 - 75 mm (Subglobose)', '130 - 220 g', 'Power Envelope', '0.6 - 1.8 N', 'Soft easily bruised mesocarp pulp; multi-phalanx conformal wrapping eliminates peak contact stresses.'],
+    ['Agriculture', 'Sweet Lime / Orange (C. sinensis)', 'dia 65 - 85 mm (Globular)', '150 - 300 g', 'Power Envelope', '1.5 - 3.5 N', 'Smooth rind requiring firm hold for stem separation without internal cell rupture; secure form-closure.'],
+    ['Agriculture', 'Bell Pepper (C. annuum)', '60 x 70 x 110 mm (Lobed)', '180 - 350 g', 'Adaptive Envelope', '1.2 - 3.0 N', 'Asymmetric multi-lobed contour; underactuated living hinges adapt passively without 3D vision scanning.']
 ]
 
 table_work = doc.add_table(rows=len(tab_work_data), cols=7)
@@ -711,7 +708,7 @@ for r_i, r_val in enumerate(tab_work_data[1:], start=1):
 
 p_cap_work = doc.add_paragraph()
 p_cap_work.alignment = WD_ALIGN_PARAGRAPH.CENTER
-p_cap_work.add_run('Table 4.3: Target workpiece library, dimensional envelope, and grasping compatibility matrix.').italic = True
+p_cap_work.add_run('Table 4.3: Agricultural workpiece library, dimensional envelope, and grasping compatibility matrix.').italic = True
 
 add_header_p('4.4 Non-linear Hyperelastic Constitutive Formulation', level=2)
 p = doc.add_paragraph('To accurately capture large strain behavior in planned BTP-II finite element simulations, TPU 95A is represented via the 2-Parameter Mooney-Rivlin strain energy density function W:\n\nW = C10*(I1 - 3) + C01*(I2 - 3) + (1/D1)*(J - 1)^2\n\nwhere C10 = 2.45 MPa, C01 = 1.15 MPa, and D1 represents material incompressibility. Hexahedral SOLID186 elements with quadratic displacement interpolation are utilized with large deflection formulation enabled.')
