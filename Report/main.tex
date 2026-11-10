@@ -270,6 +270,88 @@ Figure~\ref{fig:kinematics} illustrates the kinematic topology, showing the unbe
     \label{fig:kinematics}
 \end{figure}
 
+\subsection{Geometric Link Dimensions and Kinematic Topology}
+The monolithic finger geometry adopts an anthropomorphic 3-phalanx kinematic configuration. The continuous flexible body is partitioned into three functional phalanx segments separated by localized circular living hinge flexures:
+\begin{itemize}
+    \item \textbf{Proximal Phalanx ($L_1 = 35.0\text{ mm}$):} Anchored directly to the rigid palm base flange; initiates primary angular deflection during early tendon stroke.
+    \item \textbf{Intermediate Phalanx ($L_2 = 35.0\text{ mm}$):} Medial link segment that conforms around the lateral flanks of grasped objects.
+    \item \textbf{Distal Phalanx ($L_3 = 35.0\text{ mm}$):} Fingertip segment incorporating an integrated $5.0\text{ mm}$ radiused contact pad and a precision circular recessed pocket ($\phi = 18.3\text{ mm}$, depth $0.6\text{ mm}$) configured to seat the Interlink FSR402 thin-film sensor flush with the gripping face.
+\end{itemize}
+With circular notch gaps of $g_1 = g_2 = 5.0\text{ mm}$ and the distal fingertip extension, the total unbent finger length is $L_{\text{total}} = 115.0\text{ mm}$. The beam cross-section features a width of $w = 20.0\text{ mm}$ and height of $h = 16.0\text{ mm}$, providing substantial lateral torsional stiffness to prevent out-of-plane twisting while permitting low-resistance in-plane flexing. Symmetrically arranged on an $80.0\text{ mm}$ pitch circle diameter (PCD) palm base, the fingers deliver a combined envelope grasping range from $\phi = 25.0\text{ mm}$ to $\phi = 85.0\text{ mm}$. Table~\ref{tab:link_dimensions} details the complete geometric and kinematic design specifications.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Geometric link lengths and kinematic dimensions of the monolithic compliant finger.}
+\label{tab:link_dimensions}
+\begin{tabularx}{\textwidth}{l p{3.2cm} c X}
+\toprule
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Value} & \textbf{Functional / Kinematic Rationale} \\
+\midrule
+Proximal Phalanx Length & $L_1$ & $35.0\text{ mm}$ & Matches human proximal phalanx; provides primary envelope wrap. \\
+Intermediate Phalanx Length & $L_2$ & $35.0\text{ mm}$ & Replicates intermediate phalanx; guides medial curvature. \\
+Distal Phalanx Length & $L_3$ & $35.0\text{ mm}$ & Fingertip segment; houses recessed FSR402 contact pad ($+5\text{ mm}$ tip). \\
+Total Finger Beam Length & $L_{\text{total}}$ & $115.0\text{ mm}$ & Total effective finger length ($L_1 + g_1 + L_2 + g_2 + L_3 + \text{tip}$). \\
+Finger Cross-Section Width & $w$ & $20.0\text{ mm}$ & Ensures lateral torsional rigidity and stable planar bending. \\
+Finger Cross-Section Height & $h$ & $16.0\text{ mm}$ & Accommodates internal $2\text{ mm}$ tendon conduit with $7\text{ mm}$ wall clearance. \\
+Flexure Throat Thickness & $t$ & $1.6\text{ mm}$ & Optimized for low bending resistance while maintaining structural integrity. \\
+Circular Notch Radius & $r$ & $2.5\text{ mm}$ & Distributes bending stresses to minimize localized stress concentration. \\
+Notch Opening Gap & $g$ & $5.0\text{ mm}$ & Provides clear angular clearance for up to $30^\circ$ deflection per hinge. \\
+Tendon Moment Arm Offset & $r_{\text{cable}}$ & $6.0\text{ mm}$ & Distance from flexure neutral axis to tendon channel centerline. \\
+Tendon Conduit Diameter & $\phi_c$ & $2.0\text{ mm}$ & Lined with low-friction micro-PTFE sleeve (OD $2.0\text{ mm}$, ID $1.0\text{ mm}$). \\
+Distal Sensor Recess & $\phi_{\text{sensor}} \times d$ & $\phi 18.3 \times 0.6\text{ mm}$ & Flush mounting bed for Interlink FSR402 active sensing area. \\
+Base Pitch Circle Diameter & $\phi_{\text{base}}$ & $80.0\text{ mm}$ & Symmetrical 3-finger equilateral radial mounting flange. \\
+Target Grasp Diameter & $\phi_{\text{grasp}}$ & $25.0 - 85.0\text{ mm}$ & Adaptive envelope grasping range for domestic and industrial items. \\
+Maximum Tip Curl Angle & $\theta_{\text{total}}$ & $\approx 82^\circ$ & Cumulative angular deflection under $12 - 15\text{ mm}$ tendon stroke. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Mechanical Design Constraints and Payload Specifications}
+To ensure structural durability, non-destructive fatigue life, and robust grasping performance across diverse workpiece geometries, the compliant gripper is governed by well-defined mechanical, manufacturing, and operational constraints:
+\begin{itemize}
+    \item \textbf{Structural Stress and Elastic Strain Constraints:} Under maximum tendon tension, bending stress concentrates at the throat of the circular flexure living hinges. The maximum allowable localized Von Mises stress is restricted to $\sigma_{\text{max}} \le 22.0\text{ MPa}$. With the tensile yield strength of 3D-printed TPU 95A established at $\sigma_y \approx 48 - 52\text{ MPa}$, this ensures a structural safety factor of $SF = \sigma_y / \sigma_{\text{max}} \ge 2.2$. This margin guarantees that all hinge deformations remain purely within the linear-elastic recovery regime, preventing permanent set, plastic necking, and low-cycle fatigue failure over $>100,000$ cycles. The maximum outer-fiber tensile strain is constrained to $\varepsilon_{\text{max}} \le 45\%$, well below the material's ultimate failure strain ($>450\%$).
+    \item \textbf{Additive Manufacturing Constraints:} To avoid anisotropic delamination, all fingers are constrained to be 3D printed flat in the horizontal X-Y build plane. This guarantees that tensile bending stresses along the living hinge throat align parallel with continuous, uninterrupted extruded polymer road contours rather than across inter-layer Z-boundaries. Infill at the hinge throats is specified as $100\%$ concentric.
+    \item \textbf{Actuation and Transmission Constraints:} Actuation is achieved via single-acting high-strength Dyneema braided cable (breaking strength $>250\text{ N}$). Return extension is fully passive, powered by the stored elastic strain energy of the deformed living hinges ($E_{\text{strain}} = \sum \frac{1}{2} K_{\theta, i} \theta_i^2$). To mitigate friction losses along the internal routing conduits, the channel is lined with micro-PTFE tubing ($\mu_f \le 0.08$), ensuring that nominal tendon pull remains $T_{\text{nom}} \approx 12.5\text{ N}$ with a peak operating ceiling of $T_{\text{max}} \le 25.0\text{ N}$.
+    \item \textbf{Payload Capacity and Dynamic Grasp Specifications:} The gripper is engineered to handle a rated dynamic payload of $800 - 1500\text{ g}$ ($0.8 - 1.5\text{ kg}$) across cylinders, spheres, and rectangular objects, with a peak static envelope holding capacity of up to $2.0\text{ kg}$ ($2000\text{ g}$). With a total estimated gripper self-mass under $450\text{ g}$ (including 3 TPU fingers, PLA palm, servo mounting brackets, and spools), the design achieves an exceptional payload-to-weight ratio exceeding $3:1$ (and up to $4.4:1$ in static lock), outperforming conventional fluidic elastomer grippers ($<1.5:1$). Controlled normal clamping force spans $0.1\text{ N}$ (for delicate workpieces such as raw eggs and ripe fruit) to $20.0\text{ N}$ (for robust industrial parts), coupled with a dynamic slip-reflex latency under $35\text{ ms}$.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Summary of mechanical design constraints, actuation limits, and payload specifications.}
+\label{tab:design_constraints}
+\begin{tabularx}{\textwidth}{l l c X}
+\toprule
+\textbf{Domain} & \textbf{Design Parameter} & \textbf{Target / Limit} & \textbf{Governing Constraint and Engineering Rationale} \\
+\midrule
+\multirow{3}{*}{\textbf{Structural / Stress}} 
+& Peak Von Mises Stress & $\sigma_{\text{max}} \le 22.0\text{ MPa}$ & Safe margin below TPU 95A yield strength ($\sigma_y \approx 50\text{ MPa}$). \\
+& Safety Factor (Yield) & $SF \ge 2.2$ & Prevents permanent plastic deformation and low-cycle fatigue. \\
+& Maximum Bending Strain & $\varepsilon_{\text{max}} \le 45\%$ & Remains within reversible elastic regime (TPU elongation $>450\%$). \\
+\midrule
+\multirow{2}{*}{\textbf{Manufacturing}} 
+& Build Orientation & Flat in X-Y Plane & Ensures tensile bending stresses align with continuous filament beads. \\
+& Infill Density at Hinges & $100\%$ Concentric & Eliminates internal voids and prevents inter-layer delamination. \\
+\midrule
+\multirow{3}{*}{\textbf{Transmission}} 
+& Tendon Tensile Force & $T_{\text{nom}} = 12.5\text{ N}$ ($T_{\text{max}} \le 25\text{ N}$) & Safe operating load for high-torque digital servomotor (MG996R). \\
+& Tendon Stroke & $\Delta x = 12 - 15\text{ mm}$ & Delivers $82^\circ$ full envelope wrap across 3 living hinges. \\
+& Conduit Friction Coeff. & $\mu_f \le 0.08$ & Micro-PTFE sleeve minimizes Capstan tension loss along curved path. \\
+\midrule
+\multirow{6}{*}{\textbf{Payload \& Force}} 
+& Rated Grasp Payload & $800 - 1500\text{ g}$ ($0.8 - 1.5\text{ kg}$) & Operational capacity across irregular cylinders, spheres, and boxes. \\
+& Peak Static Payload & Up to $2.0\text{ kg}$ ($2000\text{ g}$) & Form-closure envelope grasp holding capacity under full lock. \\
+& Gripper Self-Weight & $< 450\text{ g}$ & Total mass of 3 fingers, palm base, servo mount, and spools. \\
+& Payload-to-Weight Ratio & $> 3:1$ (up to $4.4:1$) & Exceeds conventional fluidic/pneumatic soft grippers ($< 1.5:1$). \\
+& Normal Clamping Force & $0.1 - 20.0\text{ N}$ & Controllable range from fragile eggs ($0.5\text{ N}$) to rigid objects. \\
+& Closed-Loop Latency & $< 35\text{ ms}$ & Dynamic FFT reflex to servomotor torque tightening on slip. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+
 \subsection{Pseudo-Rigid-Body Modeling (PRBM)}
 To analyze the large deflections of the living hinges, the Pseudo-Rigid-Body Model (PRBM) developed by Howell \cite{howell2001compliant} is applied. A circular flexure notch of thickness $t$, radius $r$, and width $w$ subjected to an applied bending moment $M$ is modeled as a rigid link rotating about a characteristic pivot with equivalent torsional spring stiffness $K_\theta$:
 \begin{equation}

@@ -565,6 +565,97 @@ if os.path.exists('Figures and Diagrams/gripper_kinematics_diagram.png'):
     p_img_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_img_cap.add_run('Figure 4.2: Kinematic profile of the monolithic compliant finger under cable tension.').italic = True
 
+add_header_p('4.2.1 Geometric Link Lengths and Kinematic Architecture', level=3)
+p = doc.add_paragraph('The compliant finger architecture adopts an anthropomorphic 3-phalanx kinematic configuration. The monolithic flexible body is partitioned into three discrete functional phalanx segments interconnected by thin circular living hinge flexures:\n'
+                      '• Proximal Phalanx (L1 = 35.0 mm): Anchored directly to the rigid palm base flange; initiates primary angular deflection during early tendon stroke.\n'
+                      '• Intermediate Phalanx (L2 = 35.0 mm): Medial link segment that conforms around the lateral flanks of the grasped workpiece.\n'
+                      '• Distal Phalanx (L3 = 35.0 mm): Fingertip segment incorporating an integrated 5.0 mm rounded tip and a precision circular recessed pocket (dia 18.3 mm, depth 0.6 mm) configured to seat the Interlink FSR402 thin-film tactile sensor flush with the grasping surface.\n\n'
+                      'Accounting for the two notch opening gaps (g1 = g2 = 5.0 mm) and the distal fingertip extension, the total effective unbent beam length is L_total = 115.0 mm. The finger cross-section features a width of w = 20.0 mm and a height of h = 16.0 mm, providing high out-of-plane torsional rigidity against lateral twisting during asymmetric grasping while permitting compliant in-plane deflection. When assembled in a 3-finger radially symmetric array on an 80.0 mm pitch circle diameter (PCD) palm base, the fingers achieve a maximum tip curl angle of approx 82 degrees under a 12 - 15 mm tendon pull, providing an envelope grasp diameter of 25 - 85 mm.')
+
+tab_links_data = [
+    ['Parameter', 'Symbol', 'Value', 'Functional / Kinematic Rationale'],
+    ['Proximal Phalanx Length', 'L1', '35.0 mm', 'Matches human proximal phalanx; provides primary envelope wrap.'],
+    ['Intermediate Phalanx Length', 'L2', '35.0 mm', 'Replicates intermediate phalanx; guides medial curvature.'],
+    ['Distal Phalanx Length', 'L3', '35.0 mm', 'Fingertip segment; houses recessed FSR402 contact pad (+5 mm tip).'],
+    ['Total Finger Beam Length', 'L_total', '115.0 mm', 'Total effective finger length (L1 + g1 + L2 + g2 + L3 + tip).'],
+    ['Finger Cross-Section Width', 'w', '20.0 mm', 'Ensures lateral torsional rigidity and stable planar bending.'],
+    ['Finger Cross-Section Height', 'h', '16.0 mm', 'Accommodates internal 2 mm tendon conduit with 7 mm wall clearance.'],
+    ['Flexure Throat Thickness', 't', '1.6 mm', 'Optimized for low bending resistance while maintaining structural integrity.'],
+    ['Circular Notch Radius', 'r', '2.5 mm', 'Distributes bending stresses to minimize localized stress concentration.'],
+    ['Notch Opening Gap', 'g', '5.0 mm', 'Provides clear angular clearance for up to 30 deg deflection per hinge.'],
+    ['Tendon Moment Arm Offset', 'r_cable', '6.0 mm', 'Distance from flexure neutral axis to tendon channel centerline.'],
+    ['Tendon Conduit Diameter', 'phi_c', '2.0 mm', 'Lined with low-friction micro-PTFE sleeve (OD 2.0 mm, ID 1.0 mm).'],
+    ['Distal Sensor Recess', 'phi_s x d', 'phi 18.3 x 0.6 mm', 'Flush mounting bed for Interlink FSR402 active sensing area.'],
+    ['Base Pitch Circle Diameter', 'phi_base', '80.0 mm', 'Symmetrical 3-finger equilateral radial mounting flange.'],
+    ['Target Grasp Diameter', 'phi_grasp', '25.0 - 85.0 mm', 'Adaptive envelope grasping range for domestic and industrial items.'],
+    ['Maximum Tip Curl Angle', 'theta_total', 'approx 82 deg', 'Cumulative angular deflection under 12 - 15 mm tendon stroke.']
+]
+
+table_links = doc.add_table(rows=len(tab_links_data), cols=4)
+table_links.alignment = WD_TABLE_ALIGNMENT.CENTER
+for c_i, h_val in enumerate(tab_links_data[0]):
+    cell = table_links.cell(0, c_i)
+    cell.paragraphs[0].text = h_val
+    cell.paragraphs[0].runs[0].bold = True
+    set_cell_bg(cell, 'E0E8F0')
+
+for r_i, r_val in enumerate(tab_links_data[1:], start=1):
+    for c_i, val in enumerate(r_val):
+        cell = table_links.cell(r_i, c_i)
+        cell.paragraphs[0].text = val
+        if c_i == 0:
+            cell.paragraphs[0].runs[0].bold = True
+
+p_cap_links = doc.add_paragraph()
+p_cap_links.alignment = WD_ALIGN_PARAGRAPH.CENTER
+p_cap_links.add_run('Table 4.1: Geometric link lengths and kinematic dimensions of the compliant finger.').italic = True
+
+add_header_p('4.2.2 Mechanical Design Constraints and Payload Specifications', level=3)
+p = doc.add_paragraph('To guarantee long-term fatigue durability, reliable load holding, and repeatable actuation, the compliant gripper design is governed by strict mechanical, manufacturing, and operational constraints:\n'
+                      '• Structural Stress & Fatigue Constraints: Under maximum tendon tension, bending stress concentrates at the throat of the circular flexure living hinges. The maximum allowable localized Von Mises stress is restricted to sigma_max <= 22.0 MPa. With the tensile yield strength of 3D-printed TPU 95A established at sigma_y approx 48 - 52 MPa, this ensures a structural safety factor of SF >= 2.2. This margin guarantees that all hinge deformations remain purely within the linear-elastic recovery regime, preventing permanent set, plastic necking, and low-cycle fatigue failure over >100,000 cycles. The maximum outer-fiber tensile strain is constrained to epsilon_max <= 45%, well below the material\'s ultimate failure strain (>450%).\n'
+                      '• Additive Manufacturing Constraints: To avoid anisotropic delamination, all fingers are constrained to be 3D printed flat in the horizontal X-Y build plane. This guarantees that tensile bending stresses along the living hinge throat align parallel with continuous, uninterrupted extruded polymer road contours rather than across inter-layer Z-boundaries. Infill at the hinge throats is specified as 100% concentric.\n'
+                      '• Tendon Actuation and Transmission Constraints: Actuation is achieved via single-acting high-strength Dyneema braided cable (breaking strength >250 N). Return extension is fully passive, powered by the stored elastic strain energy of the deformed living hinges. To mitigate friction losses along the internal routing conduits, the channel is lined with micro-PTFE tubing (mu_f <= 0.08), ensuring that nominal tendon pull remains T_nom approx 12.5 N with a peak operating ceiling of T_max <= 25.0 N.\n'
+                      '• Payload Capacity and Dynamic Grasp Specifications: The gripper is engineered to handle a rated dynamic payload of 800 - 1500 g (0.8 - 1.5 kg) across cylinders, spheres, and rectangular objects, with a peak static envelope holding capacity of up to 2.0 kg (2000 g). With a total estimated gripper self-mass under 450 g (including 3 TPU fingers, PLA palm, servo mounting brackets, and spools), the design achieves an exceptional payload-to-weight ratio exceeding 3:1 (and up to 4.4:1 in static lock), outperforming conventional fluidic elastomer grippers (<1.5:1). Controlled normal clamping force spans 0.1 N (for delicate workpieces such as raw eggs and ripe fruit) to 20.0 N (for robust industrial parts), coupled with a dynamic slip-reflex latency under 35 ms.')
+
+tab_const_data = [
+    ['Domain', 'Design Parameter', 'Target / Limit', 'Governing Constraint and Engineering Rationale'],
+    ['Structural / Stress', 'Peak Von Mises Stress', 'sigma_max <= 22.0 MPa', 'Safe margin below TPU 95A yield strength (sigma_y approx 50 MPa).'],
+    ['Structural / Stress', 'Safety Factor (Yield)', 'SF >= 2.2', 'Prevents permanent plastic deformation and low-cycle fatigue.'],
+    ['Structural / Stress', 'Maximum Bending Strain', 'epsilon_max <= 45%', 'Remains within reversible elastic regime (TPU elongation >450%).'],
+    ['Manufacturing', 'Build Orientation', 'Flat in X-Y Plane', 'Ensures tensile bending stresses align with continuous filament beads.'],
+    ['Manufacturing', 'Infill Density at Hinges', '100% Concentric', 'Eliminates internal voids and prevents inter-layer delamination.'],
+    ['Transmission', 'Tendon Tensile Force', 'T_nom = 12.5 N (T_max <= 25 N)', 'Safe operating load for high-torque digital servomotor (MG996R).'],
+    ['Transmission', 'Tendon Stroke', 'delta_x = 12 - 15 mm', 'Delivers 82 deg full envelope wrap across 3 living hinges.'],
+    ['Transmission', 'Conduit Friction Coeff.', 'mu_f <= 0.08', 'Micro-PTFE sleeve minimizes Capstan tension loss along curved path.'],
+    ['Payload & Force', 'Rated Grasp Payload', '800 - 1500 g (0.8 - 1.5 kg)', 'Operational capacity across irregular cylinders, spheres, and boxes.'],
+    ['Payload & Force', 'Peak Static Payload', 'Up to 2.0 kg (2000 g)', 'Form-closure envelope grasp holding capacity under full lock.'],
+    ['Payload & Force', 'Gripper Self-Weight', '< 450 g', 'Total mass of 3 fingers, palm base, servo mount, and spools.'],
+    ['Payload & Force', 'Payload-to-Weight Ratio', '> 3:1 (up to 4.4:1)', 'Exceeds conventional fluidic/pneumatic soft grippers (< 1.5:1).'],
+    ['Payload & Force', 'Normal Clamping Force', '0.1 - 20.0 N', 'Controllable range from fragile eggs (0.5 N) to rigid objects.'],
+    ['Payload & Force', 'Closed-Loop Latency', '< 35 ms', 'Dynamic FFT reflex to servomotor torque tightening on slip.']
+]
+
+table_const = doc.add_table(rows=len(tab_const_data), cols=4)
+table_const.alignment = WD_TABLE_ALIGNMENT.CENTER
+for c_i, h_val in enumerate(tab_const_data[0]):
+    cell = table_const.cell(0, c_i)
+    cell.paragraphs[0].text = h_val
+    cell.paragraphs[0].runs[0].bold = True
+    set_cell_bg(cell, 'E0E8F0')
+
+for r_i, r_val in enumerate(tab_const_data[1:], start=1):
+    for c_i, val in enumerate(r_val):
+        cell = table_const.cell(r_i, c_i)
+        cell.paragraphs[0].text = val
+        if c_i <= 1:
+            cell.paragraphs[0].runs[0].bold = True
+
+p_cap_const = doc.add_paragraph()
+p_cap_const.alignment = WD_ALIGN_PARAGRAPH.CENTER
+p_cap_const.add_run('Table 4.2: Summary of mechanical design constraints, actuation limits, and payload specifications.').italic = True
+
+
+
 add_header_p('4.3 Non-linear Hyperelastic Constitutive Formulation', level=2)
 p = doc.add_paragraph('To accurately capture large strain behavior in planned BTP-II finite element simulations, TPU 95A is represented via the 2-Parameter Mooney-Rivlin strain energy density function W:\n\nW = C10*(I1 - 3) + C01*(I2 - 3) + (1/D1)*(J - 1)^2\n\nwhere C10 = 2.45 MPa, C01 = 1.15 MPa, and D1 represents material incompressibility. Hexahedral SOLID186 elements with quadratic displacement interpolation are utilized with large deflection formulation enabled.')
 
