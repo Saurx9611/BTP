@@ -369,6 +369,66 @@ The Dyneema cable is routed through internal curved guides within the finger bod
 \end{equation}
 where $\mu_f$ is the Coulomb coefficient of friction between the braided Dyneema tendon and the 3D-printed internal conduit (minimized to $\mu_f \approx 0.08$ via low-friction micro-PTFE sleeve inserts).
 
+
+\section{Grasping Mechanics, Contact Sequence, and Target Workpieces}
+
+\subsection{Underactuated Mechanical Intelligence and Multi-Phase Contact Sequence}
+Unlike conventional rigid industrial grippers that demand multi-axis servomotor coordination and complex inverse kinematic trajectory planning for every unique workpiece contour, the proposed soft robotic finger utilizes \textit{underactuated mechanical intelligence}. A single tensile tendon actuates three independent revolute degrees of freedom (MCP, PIP, and DIP living hinges). The grasping progression evolves across five discrete mechanical phases:
+\begin{enumerate}
+    \item \textbf{Phase 0 (Equilibrium Rest Configuration):} The Dyneema tendon is slack ($T = 0\text{ N}$). All three living hinges remain unbent in their straight manufactured posture ($\theta_1 = \theta_2 = \theta_3 = 0^\circ$), establishing an open grasp envelope ($\phi \approx 90 - 110\text{ mm}$).
+    \item \textbf{Phase 1 (Free In-Flight Flexure):} The base servomotor rotates the drive spool, generating cable tension $T$. This applies an inward bending moment $M = T \cdot r_{\text{cable}}$ across all three flexure notches simultaneously via the $6.0\text{ mm}$ neutral-axis offset. All phalanges flex inward proportionally to their torsional compliance ($K_{\theta, i}$).
+    \item \textbf{Phase 2 (Proximal Contact and Kinematic Motion Arrest):} As the finger sweeps inward, the proximal phalanx ($L_1$) or intermediate phalanx ($L_2$) impinges upon the exterior surface of the workpiece. The normal contact reaction force creates an opposing moment $M_{\text{contact}} = F_n \cdot d_{\text{contact}}$ that balances the tendon moment at the proximal hinge ($K_{\theta, 1}\theta_1 + M_{\text{contact}} = T \cdot r_{\text{cable}}$), arresting further angular deflection of the proximal link.
+    \item \textbf{Phase 3 (Continuous Routing and Distal Adaptive Curling):} Because the braided Dyneema tendon slides freely through low-friction micro-PTFE sleeve liners ($\mu_f \le 0.08$), the continuing spool rotation channels the remaining tensile force downstream past the arrested proximal phalanx into the unrestrained intermediate and distal living hinges ($K_{\theta, 2}$, $K_{\theta, 3}$). The intermediate and distal phalanges curl automatically around the irregular contour of the object until multi-point contact equilibrium is established. This passive morphological conformity occurs purely through elastic structural compliance, requiring zero sensory feedback or algorithmic path planning.
+    \item \textbf{Phase 4 (Stable Grasp Lock and Tactile Sensor Activation):} The distal phalangeal contact pad presses flush against the workpiece surface, transmitting contact normal force directly into the embedded Interlink FSR402 thin-film sensor. As the calibrated normal force achieves the target setpoint ($0.5 - 20.0\text{ N}$), the FreeRTOS motor control task transitions the servomotor into static holding torque mode.
+    \item \textbf{Phase 5 (Passive Strain-Energy Elastic Release):} When release is commanded, the servomotor unwinds the tendon spool. The elastic strain energy stored in the deformed TPU living hinges ($E_{\text{strain}} = \sum_{i=1}^3 \frac{1}{2} K_{\theta, i} \theta_i^2$) acts as an internal distributed restoring spring, instantly popping the fingers back to their straight resting posture without requiring reverse pushrods or dual-acting actuation.
+\end{enumerate}
+
+\subsection{Grasping Modalities: Power Envelope Grasp versus Precision Pinch Grasp}
+The kinematic architecture of the 3-finger gripper supports two primary grasping modalities depending on target workpiece dimensions and fragility:
+\begin{itemize}
+    \item \textbf{Power Envelope Grasp (Form Closure):} Suited for medium-to-large objects ($\phi = 25 - 85\text{ mm}$, mass up to $1.5 - 2.0\text{ kg}$). The three phalanges completely wrap around the workpiece boundary, maximizing contact surface area. High geometric form-closure and distributed frictional engagement lock the object securely against external dynamic accelerations during manipulator transport.
+    \item \textbf{Precision Fingertip Pinch Grasp (Force Closure):} Suited for small, thin, or delicate workpieces ($\phi = 5 - 25\text{ mm}$, e.g., thin electronic components, test tube necks, pens, and coins). Only the distal phalangeal contact pads ($L_3$) press against opposing sides of the workpiece. The high static friction coefficient of 3D-printed TPU ($\mu_s \approx 0.6 - 0.8$) provides non-slip stability under low normal clamping forces ($0.1 - 2.0\text{ N}$), preventing structural damage to brittle workpieces.
+\end{itemize}
+
+\subsection{Bio-Inspired Anthropomorphic Equivalence and the Human Tactile Reflex Arc}
+The design of the compliant gripper embodies direct bio-inspired structural and functional parallels to the human hand:
+\begin{itemize}
+    \item \textbf{Kinematic Skeletal Equivalence:} Replicates the three-phalanx kinematic chain of the human index finger (Proximal, Middle, and Distal Phalanges) and three rotational joints (Metacarpophalangeal [MCP], Proximal Interphalangeal [PIP], and Distal Interphalangeal [DIP]), replacing mechanical pins and bearings with monolithic circular flexure living hinges.
+    \item \textbf{Flexor Tendon Sheath Biomechanics:} Emulates the human deep flexor tendon (\textit{flexor digitorum profundus}) running through its synovial flexor sheath (\textit{vagina fibrosa digitorum}) by routing high-tensile Dyneema cable through low-friction micro-PTFE conduits embedded within the finger core.
+    \item \textbf{Cutaneous Mechanoreceptor Reflex Arc (Meissner's Corpuscles):} In human glabrous skin, Fast-Adapting Type I (FA-I / Meissner) mechanoreceptors do not measure static clamping pressure; instead, they fire rapid bursts of action potentials in response to high-frequency shear micro-vibrations ($100 - 300\text{ Hz}$) generated during the microscopic slip of papillary epidermal ridges across the object surface. This sensory volley triggers an involuntary spinal reflex arc that boosts grip force within $30 - 40\text{ ms}$ before macro-slip occurs. The proposed mechatronic system mirrors this biological reflex: the FSR402 sensor detects high-frequency tactile micro-vibrations, the ESP32 performs on-chip 256-point Radix-4 FFT spectral analysis in the $100 - 300\text{ Hz}$ band on Core 0, and triggers a sub-35 ms servomotor torque compensation interrupt on Core 1.
+\end{itemize}
+
+\subsection{Target Workpiece Library and Physical Compatibility Matrix}
+To evaluate gripper versatility across unstructured environments, a standardized workpiece library is established spanning agriculture, biomedical handling, domestic food packaging, and industrial assembly. Table~\ref{tab:workpiece_library} details the dimensional envelope, mass range, grasping modality, and operational force requirements for each target class.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Target workpiece library, dimensional envelope, and grasping compatibility matrix.}
+\label{tab:workpiece_library}
+\begin{tabularx}{\textwidth}{l p{2.6cm} c c c c X}
+\toprule
+\textbf{Application Domain} & \textbf{Target Workpiece} & \textbf{Envelope ($\phi$ / Dim.)} & \textbf{Mass Range} & \textbf{Grasp Mode} & \textbf{Clamping Force} & \textbf{Handling Challenge \& Soft Compliance Benefit} \\
+\midrule
+\multirow{2}{*}{\textbf{Agriculture}} 
+& Ripe Tomato / Peach & $\phi 50 - 75\text{ mm}$ & $120 - 250\text{ g}$ & Envelope & $0.8 - 2.0\text{ N}$ & Thin skin bruises easily; compliant living hinges distribute contact pressure safely. \\
+& Fresh Strawberry & $\phi 25 - 40\text{ mm}$ & $20 - 50\text{ g}$ & Pinch & $0.3 - 0.8\text{ N}$ & Highly delicate surface; fingertip compliance and low force threshold prevent bruising. \\
+\midrule
+\multirow{2}{*}{\textbf{Biomedical}} 
+& Glass Vaccine Vial & $\phi 22 - 32\text{ mm}$ & $35 - 80\text{ g}$ & Envelope & $1.5 - 3.5\text{ N}$ & Smooth low-friction glass; high TPU static friction ($\mu_s \approx 0.7$) prevents slipping. \\
+& Thin Glass Test Tube & $\phi 15 - 25\text{ mm}$ & $25 - 60\text{ g}$ & Pinch & $0.8 - 2.0\text{ N}$ & Brittle cylindrical glass; pinch grasp avoids radial crushing stress concentrations. \\
+\midrule
+\multirow{2}{*}{\textbf{Food \& Domestic}} 
+& Raw Chicken Egg & $\phi 42 - 58\text{ mm}$ & $55 - 70\text{ g}$ & Envelope & $0.5 - 1.5\text{ N}$ & Brittle calcareous shell; multi-point conformal wrap prevents point-load shell fracture. \\
+& Electric Light Bulb & $\phi 60 - 80\text{ mm}$ & $40 - 75\text{ g}$ & Envelope & $0.8 - 2.0\text{ N}$ & Fragile spherical glass envelope; conformal wrap grasps contoured globe reliably. \\
+\midrule
+\multirow{2}{*}{\textbf{Industrial}} 
+& Aluminum Cylinder & $\phi 40 - 70\text{ mm}$ & $400 - 1200\text{ g}$ & Envelope & $8.0 - 18.0\text{ N}$ & Heavy rigid metallic part; high-torque envelope lock securely supports up to $1.5\text{ kg}$ payload. \\
+& Prismatic Carton Box & $50 \times 60 \times 90\text{ mm}$ & $250 - 800\text{ g}$ & Envelope & $4.0 - 10.0\text{ N}$ & Flat geometric boundaries; compliant living hinges adapt passively to angular corners. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 \section{Non-linear Hyperelastic Constitutive Modeling for FEA}
 Standard linear elasticity cannot capture the non-linear, strain-stiffening behavior of TPU 95A under large flexural deformation. Therefore, the material is modeled as an isotropic, nearly-incompressible hyperelastic continuum. The strain energy density function $W$ is formulated using the 2-Parameter Mooney-Rivlin model \cite{mooney1940theory}:
 \begin{equation}
