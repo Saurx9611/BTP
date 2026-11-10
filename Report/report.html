@@ -330,7 +330,7 @@
     <li><strong>Actuation Schemes and Compliant Mechanisms (Saurav Shekhar):</strong> Evaluated pneumatic, tendon-driven, SMA, and DEA architectures, emphasizing the trade-off between structural compliance and load capacity.</li>
     <li><strong>Materials Science and Additive Manufacturing (G. Chandana):</strong> Analyzed silicones (Ecoflex, PDMS), TPUs, and flexible photopolymers, concluding that direct FDM 3D printing of TPU filament eliminates mold-making delays and chemical curing hazards.</li>
     <li><strong>Tactile Transduction and Feedback Technologies (Shinde Sanchali Sanjay):</strong> Examined piezoresistive, capacitive, piezoelectric, and optical sensors, establishing FSR402 thin-film piezoresistors as optimal for grasping force detection.</li>
-    <li><strong>Joint Framework (BTP-I Joint Report):</strong> Formulated the preliminary system uniting compliant structures, hyperelastic Ansys FEA, FreeRTOS embedded processing, and FFT-based slip detection.</li>
+    <li><strong>Joint Framework (BTP-I Joint Report):</strong> Formulated the preliminary system uniting compliant structures, planned hyperelastic FEA, FreeRTOS embedded processing, and FFT-based slip detection.</li>
 </ul>
 
 <h2 class="section-title">2.2 Comparative Analysis of Existing Gripper Technologies</h2>
@@ -420,8 +420,8 @@
 
 <h2 class="section-title">3.2 Specific Sub-Objectives</h2>
 <ol>
-    <li>Synthesize parametric CAD models of compliant fingers with optimized circular living hinges and recessed sensor beds in SolidWorks.</li>
-    <li>Perform non-linear hyperelastic FEA in Ansys Mechanical (Mooney-Rivlin / Yeoh) to predict bending deflections and verify safety factors.</li>
+    <li>Synthesize parametric 3D CAD models of compliant fingers with optimized circular living hinges and recessed sensor beds (planned for Stage-II).</li>
+    <li>Formulate and execute non-linear hyperelastic FEA in Ansys Mechanical (planned for Stage-II) to predict bending deflections and verify safety factors.</li>
     <li>Optimize direct-drive FDM 3D printing of TPU 95A to ensure high inter-layer tensile strength.</li>
     <li>Design and fabricate an active analog signal conditioning circuit (2nd-order Butterworth low-pass filter, \(f_c = 20\text{ Hz}\)).</li>
     <li>Implement an on-chip 256-point FFT algorithm on ESP32 Core 0 to detect micro-vibrations (\(100 - 300\text{ Hz}\)) indicative of incipient slip.</li>
@@ -459,7 +459,7 @@
 </div>
 
 <h2 class="section-title">4.3 Non-linear Hyperelastic Constitutive Formulation</h2>
-<p>To accurately capture large strain behavior in Ansys Mechanical, TPU 95A is represented via the 2-Parameter Mooney-Rivlin strain energy density function \(W\):</p>
+<p>To accurately capture large strain behavior in planned BTP-II finite element simulations, TPU 95A is represented via the 2-Parameter Mooney-Rivlin strain energy density function \(W\):</p>
 <div class="formula">
     \[ W = C_{10}(I_1 - 3) + C_{01}(I_2 - 3) + \frac{1}{D_1}(J - 1)^2 \]
 </div>
@@ -481,10 +481,13 @@
 <div class="page-break"></div>
 <h1 class="chapter-title">Chapter 5: Results and Discussion</h1>
 <h2 class="section-title">5.1 Project Status Clarification</h2>
-<p>In strict compliance with academic standards, it is documented that Stage-I (BTP-I) represents the completion of the literature survey, conceptual architecture, and preliminary modeling. No physical prototypes or experimental data were generated in Stage-I. This chapter delineates the simulation framework, experimental testing protocols, and anticipated engineering trade-offs formulated for execution in Stage-II (BTP-II).</p>
+<div class="callout">
+    <strong>Academic Clarification: "We have only decided what we will do."</strong><br>
+    In strict compliance with academic research standards and BTP-I evaluation guidelines, it is explicitly confirmed that Stage-I represents the literature-review-completed and conceptual architecture decision stage. In Stage-I, no SolidWorks 3D CAD models were constructed, no Ansys FEA simulations were executed, and no physical prototypes were fabricated or tested. Stage-I work strictly encompasses the comprehensive literature review, multi-criteria methodology selection, analytical kinematic formulations, hyperelastic constitutive modeling selection, embedded sensing architecture design, and the semester-wise implementation roadmap. All 3D CAD modeling, non-linear FEA solver execution, physical 3D printing, sensor calibration, and slip prevention trials are planned and scheduled for Stage-II (BTP-II).
+</div>
 
-<h2 class="section-title">5.2 Kinematic and FEA Simulation Protocol</h2>
-<p>Analytical evaluation shows that a flexure throat thickness of \(t = 1.6\text{ mm}\) with \(r = 2.5\text{ mm}\) achieves a total tip curl of \(82^\circ\) under \(12.5\text{ N}\) cable tension, enabling secure envelope grasping of objects between 25 mm and 85 mm in diameter. The Ansys FEA campaign will execute mesh convergence down to 0.4 mm elements, verifying that peak Von Mises stresses remain under 22 MPa (yield strength ~50 MPa), ensuring a safety factor of 2.2 for infinite fatigue life.</p>
+<h2 class="section-title">5.2 Planned Kinematic and FEA Simulation Protocol for BTP-II</h2>
+<p>Based on preliminary pseudo-rigid-body analytical formulations, a flexure throat geometry with thickness \(t \approx 1.5 - 1.8\text{ mm}\) and notch radius \(r \approx 2.5\text{ mm}\) is targeted to achieve conformal tip curl for envelope grasping of objects between 25 mm and 85 mm in diameter. In the planned BTP-II simulation campaign (Weeks 4–6), non-linear hyperelastic FEA will be executed in Ansys Mechanical using the 2-Parameter Mooney-Rivlin constitutive formulation. The simulation protocol will apply displacement-controlled tendon retraction up to 15 mm, performing mesh convergence with higher-order hexahedral elements down to 0.4 mm local notch sizing to verify that peak Von Mises stresses remain well below the ~50 MPa tensile yield limit of TPU 95A, guaranteeing high fatigue life prior to physical 3D printing.</p>
 
 <h2 class="section-title">5.3 Anticipated Technical Challenges and Mitigations</h2>
 <table>
@@ -529,11 +532,12 @@
 <div class="page-break"></div>
 <h1 class="chapter-title">Chapter 6: Conclusions and Plan for Next Phase</h1>
 <h2 class="section-title">6.1 Summary of Completed Stage-I Work</h2>
-<p>Stage-I successfully established the research foundation for the soft robotic gripper:</p>
+<p>Stage-I successfully established the research foundation and planned architecture for the soft robotic gripper:</p>
 <ul>
     <li>Evaluated candidate actuation paradigms and confirmed Monolithic FDM TPU Tendon Actuation as the superior methodology over chemical silicone casting.</li>
-    <li>Established PRBM kinematic equations and formulated non-linear hyperelastic Mooney-Rivlin FEA models for Ansys Mechanical.</li>
+    <li>Formulated the analytical PRBM kinematic equations and selected the 2-Parameter Mooney-Rivlin hyperelastic constitutive strategy for planned BTP-II simulation.</li>
     <li>Designed an integrated mechatronic pipeline uniting FSR402 sensors, active Butterworth filtering, dual-core FreeRTOS firmware, and an on-chip FFT slip-detection algorithm.</li>
+    <li><strong>Strict Scope Boundary:</strong> Reaffirmed that in Stage-I, the team has only decided what we will do. No SolidWorks CAD models, Ansys FEA runs, or physical 3D prints were produced in Stage-I; all CAD modeling, FEA simulation, fabrication, and physical experimentation are scheduled for Stage-II.</li>
 </ul>
 
 <h2 class="section-title">6.2 BTP-II 16-Week Implementation Roadmap</h2>

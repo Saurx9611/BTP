@@ -174,7 +174,7 @@ The technical literature reviewed by the project team members has been categoriz
     \item \textbf{Actuation Schemes and Gripper Architectures (Saurav Shekhar) \cite{btp_source_saurav}:} A systematic evaluation of robotic arm grippers categorized by mechanical mobility, degrees of freedom, and actuation physics (fluidic, tendon, thermal SMA, electroactive polymers). Key findings highlighted the fundamental trade-off between structural compliance and maximum payload capacity, identifying tendon-driven compliant flexures as the most power-dense, untethered alternative to fluidics.
     \item \textbf{Materials Science and Additive Fabrication Routes (G. Chandana) \cite{btp_source_chandana}:} A comparative evaluation of silicone elastomers (PDMS, Ecoflex, Dragon Skin), Thermoplastic Polyurethanes (TPU), Polyurethane (PU), and hydrogels. Chandana concluded that direct FDM 3D printing of flexible TPU filament eliminates the multi-day labor, mold design, and void-degassing bottlenecks of liquid silicone casting, while providing superior tear and abrasion resistance.
     \item \textbf{Tactile Feedback and Transduction Technologies (Shinde Sanchali Sanjay) \cite{btp_source_sanchali}:} A detailed examination of piezoresistive, capacitive, piezoelectric, optical (GelSight), and ionic sensing. Sanchali established that commercial thin-film piezoresistive Force Sensitive Resistors (FSR402) offer the ideal balance of low mechanical impedance, simple conditioning circuitry, and robustness for grasping contact interfaces, provided dynamic sensor drift and hysteresis are actively managed.
-    \item \textbf{Joint Proposed Architecture (BTP-I Project Report) \cite{btp_source_joint}:} Synthesized the preliminary framework uniting 3D-printed compliant structures, hyperelastic constitutive modeling in Ansys Mechanical, ESP32 FreeRTOS embedded acquisition, and FFT-based slip detection.
+    \item \textbf{Joint Proposed Architecture (BTP-I Project Report) \cite{btp_source_joint}:} Synthesized the preliminary framework uniting 3D-printed compliant structures, planned hyperelastic constitutive modeling, ESP32 FreeRTOS embedded acquisition, and FFT-based slip detection.
 \end{enumerate}
 
 \section{Comparative Analysis of Actuation and Grasping Technologies}
@@ -351,7 +351,10 @@ This closed-loop response occurs within $<35\text{ milliseconds}$, arresting sli
 \chapter{Results and Discussion}
 
 \section{Clarification of Project Status}
-In strict adherence to academic integrity guidelines, it is formally stated that \textbf{the project is currently at the completion of Stage-I (BTP-I)}. No physical CAD models, 3D prints, or physical hardware prototypes were fabricated during Stage-I. Consequently, this chapter presents the preliminary theoretical synthesis, computational modeling deck, experimental testing protocols, and anticipated engineering trade-offs formulated for execution in Stage-II (BTP-II).
+\begin{quote}
+\textbf{Academic Integrity Clarification: ``We have only decided what we will do.''} \\
+In strict adherence to academic integrity and BTP evaluation standards, it is explicitly confirmed that the team has only decided what we will do in Stage-I. In Stage-I, no SolidWorks 3D CAD models were constructed, no Ansys FEA simulations were executed, and no physical prototypes were 3D-printed or tested. Stage-I work strictly encompasses the comprehensive literature review, multi-criteria methodology selection, analytical kinematic formulation, hyperelastic constitutive modeling selection, embedded sensing architecture design, and the semester-wise implementation roadmap. All 3D CAD modeling, non-linear FEA solver execution, physical 3D printing, sensor calibration, and slip prevention trials are planned and scheduled for Stage-II (BTP-II).
+\end{quote}
 
 \section{Analytical Kinematic Modeling Results}
 Evaluating the circular flexure living hinge equations across living hinge throat thicknesses from $1.2\text{ mm}$ to $2.2\text{ mm}$ demonstrates that a throat thickness of $t = 1.6\text{ mm}$ with a curvature radius $r = 2.5\text{ mm}$ achieves the optimum balance between flexural compliance and torsional stiffness. At this thickness, a cable tensile load of $T = 12.5\text{ N}$ produces a cumulative tip curling angle of $\sum \theta_i \approx 82^\circ$, which is sufficient for power envelope grasping of objects ranging from $25\text{ mm}$ to $85\text{ mm}$ in diameter.
@@ -398,12 +401,13 @@ Table~\ref{tab:challenges} summarizes the technical challenges anticipated durin
 \chapter{Conclusions and Plan for Next Phase}
 
 \section{Summary of Completed Stage-I Work}
-During Stage-I (BTP-I), the project team successfully established the comprehensive theoretical and engineering foundation for a novel soft robotic end-effector:
+During Stage-I (BTP-I), the project team successfully established the comprehensive theoretical, analytical, and architectural foundation for a novel soft robotic end-effector:
 \begin{itemize}
     \item Evaluated the broader soft robotics literature, identifying critical research gaps in payload capacity, sensor-skin delamination, untethered portability, and slip perception.
     \item Established a complete materials and manufacturing comparison, confirming \textbf{Monolithic FDM 3D Printing with TPU 95A} as the optimal fabrication strategy over chemical silicone mold casting.
-    \item Synthesized the kinematic living hinge formulation and developed the hyperelastic Mooney-Rivlin FEA modeling framework.
+    \item Synthesized the kinematic living hinge formulation using Howell's PRBM and established the 2-Parameter Mooney-Rivlin hyperelastic constitutive strategy for planned BTP-II simulation.
     \item Designed an integrated mechatronic pipeline featuring thin-film FSR402 sensors, analog Butterworth filtering, dual-core FreeRTOS embedded architecture, and an on-chip FFT algorithm for autonomous incipient slip prevention.
+    \item \textbf{Strict Scope Boundary (`We Have Only Decided What We Will Do''):} Explicitly reaffirmed that in Stage-I, no SolidWorks CAD models, Ansys FEA runs, or physical 3D prints were produced. All CAD modeling, FEA solver execution, fabrication, and physical testing are scheduled for Stage-II.
 \end{itemize}
 
 \section{Semester-Wise Implementation Plan (BTP-II)}

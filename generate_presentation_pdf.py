@@ -421,27 +421,28 @@ html_slides = """<!DOCTYPE html>
             <div class="card card-blue">
                 <h3>Main & Specific Sub-Objectives</h3>
                 <ul>
-                    <li><strong>Main:</strong> Design, simulate, 3D print, and validate a monolithic tendon-driven compliant gripper with embedded tactile sensing.</li>
-                    <li><strong>CAD:</strong> SolidWorks geometric synthesis of circular living hinges.</li>
-                    <li><strong>FEA:</strong> Mooney-Rivlin hyperelastic large-deflection analysis in Ansys.</li>
-                    <li><strong>Manufacturing:</strong> Direct-drive FDM printing with TPU 95A filament.</li>
-                    <li><strong>Conditioning:</strong> Sallen-Key 2nd-order Butterworth LPF (\(f_c = 20\text{ Hz}\)).</li>
-                    <li><strong>Firmware:</strong> ESP32 FreeRTOS (Core 0: 1 kHz FFT; Core 1: Servo PWM).</li>
-                    <li><strong>Validation:</strong> Autonomous slip prevention & pull-out benchmarking.</li>
+                    <li><strong>Main:</strong> Establish the design, modeling, fabrication, and control methodology for a compliant gripper.</li>
+                    <li><strong>Design Strategy:</strong> Define circular living hinge geometry using Howell PRBM formulations.</li>
+                    <li><strong>Material Selection:</strong> Formulate direct-drive FDM printing with flexible TPU 95A filament.</li>
+                    <li><strong>Simulation Strategy:</strong> Formulate hyperelastic constitutive modeling for BTP-II simulation.</li>
+                    <li><strong>Signal Conditioning:</strong> Design Sallen-Key 2nd-order Butterworth LPF (\(f_c = 20\text{ Hz}\)).</li>
+                    <li><strong>Firmware Architecture:</strong> Design dual-core FreeRTOS pipeline (1 kHz FFT / Servo PWM).</li>
+                    <li><strong>Validation Plan:</strong> Outline pull-out force benchmarking and autonomous slip prevention.</li>
                 </ul>
             </div>
             <div class="card card-teal">
                 <h3>Technical Scope & Boundaries</h3>
                 <ul>
-                    <li><strong>IN-SCOPE:</strong></li>
-                    <li>• Parametric CAD & non-linear hyperelastic Ansys FEA.</li>
-                    <li>• Direct FDM additive manufacturing of monolithic TPU fingers.</li>
-                    <li>• FSR402 piezoresistive sensor integration & analog PCB design.</li>
-                    <li>• FreeRTOS dual-core firmware & micro-ROS / ROS 2 telemetry.</li>
-                    <li>• Static force calibration and dynamic pull-out slip trials.</li>
+                    <li><strong>COMPLETED IN STAGE-I:</strong></li>
+                    <li>• Multi-thematic literature review & comparative technology evaluation.</li>
+                    <li>• Selection of monolithic FDM TPU tendon-driven gripper methodology.</li>
+                    <li>• Analytical kinematic formulations (Howell PRBM & Capstan friction).</li>
+                    <li>• Embedded signal processing & FreeRTOS architectural design.</li>
+                    <li><strong>PLANNED FOR STAGE-II (BTP-II):</strong></li>
+                    <li>• SolidWorks 3D CAD modeling & Ansys non-linear hyperelastic FEA.</li>
+                    <li>• Physical prototype 3D printing, sensor assembly, & experimental trials.</li>
                     <li><strong>OUT-OF-SCOPE:</strong></li>
-                    <li>• High-speed sorting (&gt;3 m/s) and multi-axis shear arrays.</li>
-                    <li>• Underwater or explosive ordnance field trials.</li>
+                    <li>• High-speed sorting (&gt;3 m/s), multi-axis shear arrays, underwater trials.</li>
                 </ul>
             </div>
         </div>
@@ -526,32 +527,34 @@ html_slides = """<!DOCTYPE html>
     </div>
 </div>
 
-<!-- SLIDE 11: HYPERELASTIC FEA -->
+<!-- SLIDE 11: MATERIAL & SIMULATION STRATEGY -->
 <div class="slide">
     <div class="slide-header">
-        <h2>Non-linear Hyperelastic FEA Framework (Ansys Mechanical)</h2>
-        <p>Predicting large deformation kinematics, stress concentrations, and fatigue safety</p>
+        <h2>Proposed Material Selection & Planned Simulation Strategy</h2>
+        <p>Structural selection of TPU 95A and non-linear hyperelastic modeling approach for BTP-II</p>
     </div>
     <div class="slide-content">
         <div class="grid-2">
             <div class="card card-blue">
-                <h3>Constitutive Material Modeling</h3>
+                <h3>Material Selection: TPU 95A</h3>
                 <ul>
-                    <li>TPU 95A exhibits non-linear, strain-stiffening behavior.</li>
-                    <li>Modeled using 2-Parameter Mooney-Rivlin strain energy density function \(W\):<br>
-                    <span style="font-weight: bold; color: #003366;">\(W = C_{10}(I_1 - 3) + C_{01}(I_2 - 3) + \frac{1}{D_1}(J - 1)^2\)</span></li>
-                    <li>Material constants from tensile testing: \(C_{10} = 2.45\text{ MPa}\), \(C_{01} = 1.15\text{ MPa}\).</li>
-                    <li>Higher-order 20-node hexahedral elements (SOLID186) eliminate shear locking under severe bending.</li>
-                    <li>Newton-Raphson solver with Large Deflection activated.</li>
+                    <li>Evaluated silicones (Ecoflex, PDMS), photopolymers, and polyurethanes.</li>
+                    <li>Silicone molding requires multi-part molds, vacuum degassing, and curing ovens.</li>
+                    <li>Direct FDM 3D printing of TPU 95A eliminates molds and enables rapid prototyping.</li>
+                    <li>Shore 95A provides high flexural resilience while preventing out-of-plane torsional buckling.</li>
+                    <li>Monolithic printing enables continuous living hinges without assembly pins or mechanical backlash.</li>
                 </ul>
             </div>
             <div class="card card-teal">
-                <h3>Simulation Objectives & Safety Margins</h3>
+                <h3>Planned Hyperelastic FEA Strategy (BTP-II)</h3>
                 <ul>
-                    <li><strong>Mesh Convergence:</strong> Sub-millimeter element refinement (0.4 mm) across flexure throat.</li>
-                    <li><strong>Bending Verification:</strong> Predicting tip deflection angle vs cable tensile load \(T\) (12.5 N produces ~82° curl).</li>
-                    <li><strong>Stress Verification:</strong> Peak Von Mises stress at hinge throat remains &lt;22 MPa under 25 N pull.</li>
-                    <li><strong>Fatigue Assurance:</strong> Ultimate tensile strength of extruded TPU 95A is ~50 MPa \(\rightarrow\) Safety Factor \(SF &gt; 2.2\), ensuring infinite cyclic fatigue life (&gt;\(10^5\) cycles).</li>
+                    <li><strong>Non-linear Mechanics:</strong> TPU undergoes large elastic deformations and strain-stiffening. Hookean linear elasticity is invalid for large flexure bending.</li>
+                    <li><strong>Selected Constitutive Law:</strong> 2-Parameter Mooney-Rivlin strain energy formulation:<br>
+                    <span style="font-weight: bold; color: #003366;">\(W = C_{10}(I_1 - 3) + C_{01}(I_2 - 3) + \frac{1}{D_1}(J - 1)^2\)</span></li>
+                    <li><strong>Planned BTP-II Simulation Goals:</strong></li>
+                    <li>• Model finger curl angle versus tendon tension prior to 3D printing.</li>
+                    <li>• Evaluate Von Mises stress concentrations at flexure notches to ensure high fatigue life.</li>
+                    <li><em>Status: Modeling methodology decided; simulation runs will be performed in BTP-II.</em></li>
                 </ul>
             </div>
         </div>
@@ -636,27 +639,30 @@ html_slides = """<!DOCTYPE html>
 <div class="slide">
     <div class="slide-header">
         <h2>Current Progress & Project Status (BTP-I Baseline)</h2>
-        <p>Clear differentiation between completed conceptual work and proposed execution</p>
+        <p>Clear differentiation between completed conceptual decisions and proposed BTP-II execution</p>
     </div>
     <div class="slide-content">
         <div class="grid-2">
             <div class="card card-teal">
                 <h3>Work Completed in Stage-I</h3>
                 <ul>
-                    <li>• <strong>Literature Review:</strong> Comprehensive synthesis of actuation, materials, and tactile sensing technologies.</li>
-                    <li>• <strong>Methodology Confirmation:</strong> Rigorous multi-criteria evaluation selecting Monolithic FDM TPU Tendon Gripper.</li>
-                    <li>• <strong>Analytical Kinematics:</strong> Howell PRBM living hinge stiffness equations and Capstan friction formulations derived.</li>
-                    <li>• <strong>Hyperelastic Simulation Deck:</strong> 2-Parameter Mooney-Rivlin constitutive parameters established for Ansys.</li>
-                    <li>• <strong>Signal Architecture:</strong> Active Butterworth filter schematic and FreeRTOS dual-core task partition designed.</li>
+                    <li>• <strong>Literature Review:</strong> Comprehensive synthesis of actuation, materials, and tactile sensing.</li>
+                    <li>• <strong>Methodology Decision:</strong> Multi-criteria selection of Monolithic FDM TPU Tendon Gripper.</li>
+                    <li>• <strong>Conceptual Design:</strong> Selected circular living hinge architecture and Dyneema routing.</li>
+                    <li>• <strong>Theoretical Kinematics:</strong> Howell PRBM living hinge stiffness & Capstan friction equations.</li>
+                    <li>• <strong>Signal Architecture:</strong> Sallen-Key Butterworth filter & dual-core FreeRTOS pipeline.</li>
+                    <li>• <strong>Implementation Plan:</strong> Structured 16-week execution roadmap for BTP-II.</li>
                 </ul>
             </div>
             <div class="card card-blue">
-                <h3>Academic Clarification of Status</h3>
+                <h3>Status Clarification: Decisions & Planning</h3>
                 <ul>
-                    <li><strong>IMPORTANT DISTINCTION:</strong></li>
-                    <li>In strict compliance with academic standards, no physical CAD models, 3D prints, or experimental data were generated in Stage-I.</li>
-                    <li>The project has completed the literature review, theoretical formulation, and conceptual architecture.</li>
-                    <li>All mechanical fabrication, FEA simulations, sensor wiring, and experimental trials are systematically scheduled for Stage-II (BTP-II).</li>
+                    <li><strong>IMPORTANT ACADEMIC CLARIFICATION:</strong></li>
+                    <li><em style="font-size: 11pt; color: #003366; font-weight: bold;">"We have only decided what we will do."</em></li>
+                    <li>• In strict compliance with academic standards, no SolidWorks CAD models were constructed in Stage-I.</li>
+                    <li>• No Ansys FEA simulations were executed in Stage-I.</li>
+                    <li>• No physical prototypes were 3D printed or experimentally tested in Stage-I.</li>
+                    <li>• All 3D CAD modeling, FEA simulation, fabrication, sensor wiring, and experimental trials are scheduled for Stage-II (BTP-II).</li>
                 </ul>
             </div>
         </div>

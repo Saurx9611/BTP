@@ -38,12 +38,12 @@ The presentation follows an interconnected engineering narrative structured arou
 | **8** | Project Objectives & Scope | **G. Chandana** | 60 | 0:30 | Primary objective, modular sub-tasks, and in-scope vs out-of-scope boundaries. |
 | **9** | Confirmed Methodology Overview | **Chandana / Saurav / Sanchali** | 90 | 0:45 | 3 Pillars: TPU Flexures (Chandana), Tendon Drive (Saurav), Tactile Edge (Sanchali). |
 | **10** | Kinematic Modeling & PRBM | **Saurav Shekhar** | 80 | 0:40 | Howell PRBM formulation (K_theta), throat thickness (1.6 mm), Capstan friction. |
-| **11** | Hyperelastic FEA Framework | **G. Chandana** | 85 | 0:42 | Mooney-Rivlin (C10, C01), SOLID186 mesh, tip curl, Von Mises <22 MPa, SF >2.2. |
+| **11** | Proposed Material & Simulation Strategy | **G. Chandana** | 80 | 0:40 | TPU 95A benefits over molding; Mooney-Rivlin (C10, C01) formulation planned for BTP-II. |
 | **12** | Mechatronic & Firmware Architecture | **Shinde Sanchali Sanjay** | 70 | 0:35 | ESP32 dual-core FreeRTOS pipeline: Core 0 (1 kHz DMA/FFT) vs Core 1 (100 Hz PWM). |
 | **13** | Tactile Signal & Slip Prevention | **Shinde Sanchali Sanjay** | 80 | 0:40 | Butterworth filter (fc=20 Hz), FFT slip energy (100–300 Hz), <35 ms reflex. |
-| **14** | Current Progress & Academic Status | **G. Chandana** | 60 | 0:30 | Stage-I completion summary; explicit confirmation: no fabrication in Stage-I. |
+| **14** | Current Progress & Academic Status | **G. Chandana** | 60 | 0:30 | Stage-I completion summary; explicit confirmation: "We have only decided what we will do." |
 | **15** | Anticipated Challenges & Mitigations| **Chandana / Saurav / Sanchali** | 65 | 0:32 | TPU extrusion/bonding (Chandana), tendon friction (Saurav), FSR drift (Sanchali). |
-| **16** | BTP-II Implementation Roadmap | **Saurav Shekhar** | 55 | 0:27 | 16-week Gantt schedule from SolidWorks CAD to live physical demonstration. |
+| **16** | BTP-II Implementation Roadmap | **Saurav Shekhar** | 55 | 0:27 | 16-week Gantt schedule from detailed 3D CAD modeling to live physical demonstration. |
 | **17** | Expected Outcomes & Final Demo | **Shinde Sanchali Sanjay** | 65 | 0:32 | Conformal grasp, ROS 2 telemetry dashboard, live slip-prevention demonstration. |
 | **18** | Conclusions & Key References | **Saurav / Chandana / Sanchali** | 70 | 0:35 | Final engineering synthesis, formal thanks, opening floor to the committee. |
 
@@ -122,7 +122,7 @@ The presentation follows an interconnected engineering narrative structured arou
 - **Presenter:** **G. Chandana** (Duration: 0:30 | 60 words)
 - **Visual Cue:** Main objective banner, specific sub-objective check-list, In-Scope vs Out-of-Scope boundary boxes.
 - **Spoken Script:**
-  > "To resolve these gaps, our main objective is to design, simulate, 3D print, and validate a monolithic tendon-driven compliant gripper with embedded tactile sensing. Our scope encompasses SolidWorks parametric CAD, Ansys hyperelastic FEA, direct-drive TPU printing, Sallen-Key analog filtering, dual-core FreeRTOS firmware, and slip-prevention benchmarking. High-speed industrial sorting above three meters per second and underwater deployment are explicitly out-of-scope for this project."
+  > "To resolve these gaps, our main objective is to design, simulate, 3D print, and validate a monolithic tendon-driven compliant gripper with embedded tactile sensing. Our planned scope for Stage-II encompasses detailed 3D CAD modeling, non-linear hyperelastic FEA, direct-drive TPU printing, Sallen-Key analog filtering, dual-core FreeRTOS firmware, and slip-prevention benchmarking. In Stage-I, we have completed the fundamental theoretical formulations and architecture decisions. High-speed industrial sorting above three meters per second and underwater deployment are explicitly out-of-scope for this project."
 - **Technical Emphasis:** Clearly state the boundaries: *FDM TPU + FEA + FreeRTOS + static/dynamic benchmarking*.
 - **Handoff:** *"All three of us will now explain the three pillars of our confirmed methodology."*
 
@@ -149,7 +149,7 @@ The presentation follows an interconnected engineering narrative structured arou
 - **Technical Emphasis:** Point to the two displayed equations:
   $$K_\theta = \frac{E \cdot w \cdot t^{2.5}}{9\pi \sqrt{r}} \qquad T_{\text{distal}} = T_{\text{base}} \cdot e^{-\sum \mu_f \theta_i}$$
   Emphasize t = 1.6 mm throat thickness and mu_f = 0.08 PTFE sleeves.
-- **Handoff:** *"Chandana will now present the non-linear hyperelastic finite element simulation framework."*
+- **Handoff:** *"Chandana will now present our proposed material selection and planned finite element simulation strategy."*
 
 ### Slide 11: Non-linear Hyperelastic FEA Framework (Ansys Mechanical)
 - **Presenter:** **G. Chandana** (Duration: 0:42 | 85 words)
@@ -187,12 +187,12 @@ The presentation follows an interconnected engineering narrative structured arou
 
 ### Slide 14: Current Progress & Baseline Results (BTP-I)
 - **Presenter:** **G. Chandana** (Duration: 0:30 | 60 words)
-- **Visual Cue:** Stage-I completed deliverables checklist alongside prominent Academic Clarification banner.
+- **Visual Cue:** Stage-I completed deliverables checklist alongside prominent Academic Clarification banner: *"We have only decided what we will do."*
 - **Spoken Script:**
-  > "In Stage-I, we have completed the comprehensive literature synthesis, confirmed our tendon-driven TPU methodology, derived the Howell PRBM kinematic equations, established the Mooney-Rivlin simulation deck, and designed the FreeRTOS signal processing architecture.
+  > "In Stage-I, we have completed the comprehensive literature synthesis, confirmed our tendon-driven TPU methodology, derived the Howell PRBM kinematic equations, selected our hyperelastic constitutive modeling strategy, and designed the FreeRTOS signal processing architecture.
   > 
-  > To maintain strict academic integrity, we emphasize that no physical prototypes, 3D prints, or experimental data were generated in Stage-I. All hardware fabrication, FEA solver execution, and physical trials are systematically scheduled for Stage-II."
-- **Technical Emphasis:** Maintain absolute academic honesty. Distinguish completed theoretical/analytical work from future physical testing.
+  > Crucially, in Stage-I, we have only decided what we will do. In strict adherence to academic standards, we have not constructed any SolidWorks CAD models, executed Ansys FEA simulations, or 3D-printed physical prototypes. All 3D modeling, FEA simulation, fabrication, and physical testing are scheduled for execution in BTP-II."
+- **Technical Emphasis:** Maintain absolute academic honesty: Stage-I establishes theoretical and architecture decisions; all CAD modeling, FEA solver execution, and hardware fabrication are reserved for BTP-II.
 - **Handoff:** *"We now discuss anticipated engineering challenges and our proactive mitigation strategies."*
 
 ### Slide 15: Anticipated Challenges & Engineering Mitigations
@@ -212,7 +212,7 @@ The presentation follows an interconnected engineering narrative structured arou
 - **Presenter:** **Saurav Shekhar** (Duration: 0:27 | 55 words)
 - **Visual Cue:** Comprehensive 16-Week Gantt Chart illustrating task progression across CAD, FEA, Fabrication, and Testing.
 - **Spoken Script:**
-  > "Our BTP-II implementation spans sixteen structured weeks. Weeks One through Three finalize parametric CAD. Weeks Four through Six execute the non-linear Ansys simulations. Weeks Seven and Eight cover FDM 3D printing and tendon rigging. Weeks Nine to Eleven integrate sensor conditioning and FreeRTOS firmware. Weeks Twelve to Fourteen conduct pull-out force trials, culminating in our live slip-prevention demonstration."
+  > "Our BTP-II implementation spans sixteen structured weeks. Weeks One through Three will develop the detailed 3D CAD models. Weeks Four through Six will execute the non-linear hyperelastic FEA simulations in Ansys. Weeks Seven and Eight cover FDM 3D printing and tendon rigging. Weeks Nine to Eleven integrate sensor conditioning and FreeRTOS firmware. Weeks Twelve to Fourteen conduct pull-out force trials, culminating in our live slip-prevention demonstration."
 - **Technical Emphasis:** Point to the milestones: *Weeks 1–3 (CAD), Weeks 4–6 (FEA), Weeks 7–8 (Printing), Weeks 9–11 (Firmware), Weeks 12–16 (Testing & Demo)*.
 - **Handoff:** *"Sanchali will now outline our final expected technical outcomes."*
 
@@ -278,7 +278,7 @@ The presentation follows an interconnected engineering narrative structured arou
   - *Q4: How do you prevent inter-layer shear delamination at the living hinges?*  
     **Answer:** We orient fingers horizontally flat on the build plate. Tensile bending stresses act parallel to continuous extruded strands rather than pulling across layer boundaries. Printing at 225°C ensures full thermal fusion.
   - *Q5: Has Ansys FEA already been run, or is this an analytical framework?*  
-    **Answer:** In strict compliance with academic standards, Stage-I formulated the simulation deck, constitutive laws, and mesh strategy. Full non-linear solver execution is scheduled for Weeks 4–6 of BTP-II.
+    **Answer:** In strict compliance with academic standards and BTP-I guidelines, we have only decided what we will do. We have not created any SolidWorks CAD models or executed Ansys FEA simulations in Stage-I. We have selected the Mooney-Rivlin constitutive formulation and established the simulation strategy; full CAD modeling, mesh generation, and non-linear solver execution are scheduled for Weeks 1 through 6 of BTP-II.
 
 ---
 
@@ -341,6 +341,6 @@ The presentation follows an interconnected engineering narrative structured arou
 | **Distinct Individual Contributions** | **PASS** | Sanchali (Intro, Motivation, Problem, Sensing & FreeRTOS), Saurav (Actuation & PRBM), Chandana (Materials, FDM & FEA). |
 | **Shared Literature Review (Slide 5)** | **PASS** | Slide 5 is divided into three equal 15-second segments, each presenting their specific literature domain. |
 | **Strict 10-Minute Limit** | **PASS** | Total word count is exactly **1,225 words** (~9 minutes 50 seconds at 125 wpm), preventing committee cutoff. |
-| **Academic Integrity Boundary** | **PASS** | Explicitly articulated on Slide 14 and throughout: Stage-I covers literature, kinematics, and simulation frameworks; physical fabrication and testing belong strictly to BTP-II. |
+| **Academic Integrity Boundary** | **PASS** | Explicitly articulated on Slide 14 and throughout: In Stage-I, we have only decided what we will do. Literature review, methodology selection, analytical kinematics, and simulation strategies are completed. No SolidWorks CAD models, Ansys FEA runs, or physical 3D prints were produced in Stage-I; all CAD modeling, FEA simulation, fabrication, and physical testing are scheduled for Stage-II. |
 | **Consistency with Written Report** | **PASS** | All equations ($K_\theta$, Capstan, Mooney-Rivlin, $E_{\text{slip}}$), material constants, and hardware specs match `BTP_Report_Soft_Robotic_Gripper.pdf` exactly. |
 | **IIT Kharagpur Tone** | **PASS** | Professional, confident, technically rigorous language suitable for evaluation under Prof. Sankha Deb. |

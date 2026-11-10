@@ -14,10 +14,10 @@
 | Checkpoint / Verification Item | Target Requirement | Audit Finding | Status |
 | :--- | :--- | :--- | :--- |
 | **1. Primary Source Fidelity** | Reflect all 4 student documents without hallucinated citations | Fully cross-referenced against `BTP_Report (1)`, `Chandana`, `Sanchali`, and `Saurav`. | **PASSED (100%)** |
-| **2. Status Delineation** | Zero proposed work described as completed | Stage-I explicitly defined as literature & conceptual formulation. Zero CAD/prints claimed as completed. | **PASSED (100%)** |
+| **2. Status Delineation ("We have only decided what we will do")** | Zero proposed work described as completed; no premature CAD/FEA claims | Stage-I explicitly defined as literature review & conceptual decisions. No SolidWorks CAD or Ansys FEA completed. | **PASSED (100%)** |
 | **3. Methodological Consistency** | Identical methodology across Report, Presentation, and Code | Confirmed **Monolithic 3D-Printed (FDM TPU) Tendon-Driven Gripper with FSR402 Sensing** throughout. | **PASSED (100%)** |
 | **4. Mathematical Formulations** | PRBM kinematics, Capstan friction, Mooney-Rivlin FEA, Butterworth, FFT | Rigorously derived with consistent variable nomenclature across all documents. | **PASSED (100%)** |
-| **5. Deliverable Integrity** | All PDF, DOCX, PPTX, and TeX files compile and open cleanly | Verified: 16-page Report PDF, 18-slide Presentation PDF, editable DOCX, PPTX, and Overleaf ZIP. | **PASSED (100%)** |
+| **5. Deliverable Integrity** | All PDF, DOCX, PPTX, and TeX files compile and open cleanly | Verified: 16-page Report PDF, 18-slide Presentation PDF, editable DOCX, PPTX, Defense Script PDF, and Overleaf ZIP. | **PASSED (100%)** |
 | **6. Visual & Typographic Standards** | Professional styling without AI clutter or generic templates | Custom 300 DPI Matplotlib vector diagrams; consistent IIT Kharagpur navy/slate academic design. | **PASSED (100%)** |
 
 ---
@@ -47,6 +47,8 @@
 | `Final Deliverables/BTP_Report_Soft_Robotic_Gripper.docx` | MS Word | 12pt Times / Arial | Formatted with formal title page, certificate, abstract, styled tables, and embedded graphics. |
 | `Final Deliverables/BTP_Presentation_Soft_Robotic_Gripper.pptx` | MS PowerPoint | 18 Slides (16:9) | Modern engineering card layout, zero text walls, embedded vector plots, formatted tables. |
 | `Final Deliverables/BTP_Presentation_Soft_Robotic_Gripper.pdf` | Adobe PDF | 18 Slides (16:9) | Widescreen PDF export via Chromium; ready for digital presentation or projection. |
+| `Final Deliverables/BTP_I_Defense_Presentation_Script.pdf` | Adobe PDF | 13 Pages | Professional 10-minute defense rehearsal manual with pointing map, timing, and Q&A. |
+| `Final Deliverables/BTP_I_Defense_Presentation_Script.md` | Markdown | Complete Script | Full spoken script with individual owner attribution (Sanchali on Slides 1–4). |
 | `Final Deliverables/BTP_Report_LaTeX_Source.zip` | ZIP Archive | Complete TeX Deck | Contains `main.tex`, `references.bib`, and all 5 high-res figures; ready for Overleaf. |
 
 ---
